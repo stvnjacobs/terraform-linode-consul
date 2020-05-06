@@ -384,8 +384,7 @@ function run {
   local systemd_stderr=""
   local bin_dir=""
   local user=""
-  local cluster_tag_key=""
-  local cluster_tag_value=""
+  local cluster_tag_name=""
   local datacenter=""
   local upgrade_version_tag=""
   local enable_gossip_encryption="false"
@@ -445,9 +444,9 @@ function run {
         user="$2"
         shift
         ;;
-      --cluster-tag-key)
+      --cluster-tag-name)
         assert_not_empty "$key" "$2"
-        cluster_tag_key="$2"
+        cluster_tag_name="$2"
         shift
         ;;
       --cluster-tag-value)
