@@ -127,11 +127,11 @@ function get_instance_json {
 }
 
 function get_instance_id {
-  get_instance_json | jq '.id'
+  get_instance_json | jq -r '.id'
 }
 
 function get_instance_region {
-  get_instance_json | jq '.region'
+  get_instance_json | jq -r '.region'
 }
 
 function get_instance_tags {
