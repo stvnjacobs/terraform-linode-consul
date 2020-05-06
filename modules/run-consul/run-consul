@@ -217,7 +217,7 @@ function generate_consul_config {
     log_warn "Cluster tag name ($cluster_tag_key) is empty. Will not automatically try to form a cluster based on Linode tags."
   else
     retry_join_json=$(cat <<EOF
-"retry_join": ["provider=linode region=$instance_region tag_name=$cluster_tag_name"]
+"retry_join": ["provider=linode region=$instance_region tag_name=$cluster_tag_name"],
 EOF
 )
   fi
