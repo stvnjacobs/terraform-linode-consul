@@ -18,27 +18,34 @@ variable "instance_type" {
   type        = string
 }
 
+# TODO: multi-region support
+variable "region" {
+  description = "The region into which the Linode instances should be deployed."
+  type        = string
+}
+
+variable "role" {
+  description = "The role must be one of \"server\" or \"client\"."
+  type        = string
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
 
+#
 variable "cluster_size" {
   description = "The number of nodes to have in the Consul cluster. We strongly recommended that you use either 3 or 5."
   type        = number
   default     = 3
 }
 
+
 variable "cluster_tag_name" {
   description = "Add a tag with this name to each instance. This can be used to automatically find other Consul nodes and form a cluster."
   type        = string
   default     = "consul-servers-auto-join"
-}
-
-variable "regions" {
-  description = "The regions into which the Linode instances should be deployed."
-  type        = list(string)
-  default     = []
 }
 
 variable "ssh_keys" {
@@ -47,11 +54,14 @@ variable "ssh_keys" {
   default     = []
 }
 
+# TODO: disk sizes
 variable "root_volume_size" {
   description = "The size, in GB, of the root volume."
   type        = number
   default     = 50
 }
+
+# TODO: firewall
 variable "server_rpc_port" {
   description = "The port used by servers to handle incoming requests from other agents."
   type        = number
