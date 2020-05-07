@@ -1,7 +1,6 @@
-resource "linode_token" "readonly" {
-  count  = var.cluster_size
+resource "linode_token" "bootstrap" {
   scopes = "linodes:read_only"
-  label  = "${var.cluster_name}-${count.index}"
+  label  = "${var.cluster_name}-bootstrap"
   expiry = timeadd(timestamp(), "10m")
 }
 
@@ -32,7 +31,7 @@ resource "linode_instance" "consul_instance" {
     }
 
     inline = [
-      "/usr/local/bin/run-consul --${var.role} --cluster-tag-name ${var.cluster_tag_name} --environment LINODE_TOKEN=${linode_token.readonly[count.index].token} --environment LINODE_CLI_TOKEN=${linode_token.readonly[count.index].token}",
+      "/usr/local/bin/run-consul --${var.role} --cluster-tag-name ${var.cluster_tag_name} --environment LINODE_TOKEN=${linode_token.bootstrap.token} --environment LINODE_CLI_TOKEN=${linode_token.bootstrap.token}",
     ]
   }
 }
