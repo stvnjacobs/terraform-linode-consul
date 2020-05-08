@@ -106,31 +106,36 @@ function assert_not_empty {
 }
 
 function get_instance_ip_address {
+  log_info 'get_instance_ip_address'
   curl --silent --location "https://ipv4.icanhazip.com"
 }
 
 function get_instance_json_by_ip {
   readonly ip_address=$1
   ip_address=$(get_instance_ip_address)
+  log_info 'get_instance_json_by_ip'
   linode-cli linodes list --json | jq 'map(select(.ipv4[] | contains ("'"${ip_address}"'")))'
 }
 
 function get_instance_ip_address {
+  log_info 'get_instance_ip_address'
   curl --silent --location "https://ipv4.icanhazip.com"
 }
 
 function get_instance_json {
   local ip_address=""
-
   ip_address=$(get_instance_ip_address)
+  log_info 'get_instance_json'
   linode-cli linodes list --json | jq 'map(select(.ipv4[] | contains ("'"${ip_address}"'"))) | .[]'
 }
 
 function get_instance_id {
+  log_info 'get_instance_id'
   get_instance_json | jq -r '.id'
 }
 
 function get_instance_region {
+  log_info 'get_instance_region'
   get_instance_json | jq -r '.region'
 }
 
@@ -144,6 +149,7 @@ function get_instance_tags {
 
   log_info "Looking up tags for Instance $instance_id in $instance_region"
   for (( i=1; i<="$MAX_RETRIES"; i++ )); do
+    log_info 'get_instance_tags'
     tags=$(get_instance_json | jq -r '.tags')
     count_tags=$(echo $tags | jq -r ".[] | length")
     if [[ "$count_tags" -gt 0 ]]; then
@@ -238,6 +244,7 @@ EOF
     local cluster_size=""
 
     instance_tags=$(get_instance_tags "$instance_id" "$instance_region")
+    # TODO" fix missing get_cluster_size
     cluster_size=$(get_cluster_size "$instance_tags" "$instance_region")
 
     bootstrap_expect="\"bootstrap_expect\": $cluster_size,"
