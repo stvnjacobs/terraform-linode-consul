@@ -1,0 +1,10 @@
+.DS_Store
+.idea
+*.log
+tmp/
+
+# Terraform files
+.terraform
+terraform.tfstate
+terraform.tfvars
+*.tfstate*
