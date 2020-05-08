@@ -5,7 +5,7 @@ variable "cluster_name" {
 }
 
 variable "image_id" {
-  description = "The ID of the Linode Image to run in this cluster. Should be an AMI that had Consul installed and configured by the install-consul module."
+  description = "The ID of the Linode Image to run in this cluster. Should be an disk image that had Consul installed and configured by the install-consul module."
   type        = string
   default     = "private/8783532"
 }
