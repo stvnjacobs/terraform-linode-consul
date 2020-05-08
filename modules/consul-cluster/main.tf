@@ -25,7 +25,7 @@ resource "linode_instance" "consul_instance" {
       agent = "true"
     }
 
-    content     = "[DEFAULT]\n token = ${linode_token.bootstrap.token}\n region=${var.region}\n type=${var.instance_type}"
+    content     = "[DEFAULT]\n token = ${linode_token.bootstrap.token}\n region=${var.region}\n type=${var.instance_type}\n image=${var.image_id}\n"
     destination = "/root/.linode-cli"
   }
 
