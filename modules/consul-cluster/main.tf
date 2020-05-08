@@ -17,10 +17,17 @@ resource "linode_instance" "consul_instance" {
   swap_size = 256
   private_ip = true
 
-# must set `LINODE_TOKEN` env for -retry-join
-# see modules/run-consul
-# https://www.consul.io/docs/agent/cloud-auto-join.html#linode
+  provisioner "file" {
+    connection {
+      host  = self.ip_address
+      type  = "ssh"
+      user  = "root"
+      agent = "true"
+    }
 
+    content     = "[DEFAULT]\n token = ${linode_token.bootstrap.token}"
+    destination = "/root/.linode-cli"
+  }
 
   provisioner "remote-exec" {
     connection {
@@ -31,7 +38,7 @@ resource "linode_instance" "consul_instance" {
     }
 
     inline = [
-      "/opt/consul/bin/run-consul --${var.role} --cluster-tag-name ${var.cluster_tag_name} --environment LINODE_TOKEN=${linode_token.bootstrap.token} --environment LINODE_CLI_TOKEN=${linode_token.bootstrap.token}",
+      "/opt/consul/bin/run-consul --${var.role} --cluster-tag-name ${var.cluster_tag_name} --environment LINODE_TOKEN=${linode_token.bootstrap.token}",
     ]
   }
 }
