@@ -31,7 +31,7 @@ resource "linode_instance" "consul_instance" {
     }
 
     inline = [
-      "/usr/local/bin/run-consul --${var.role} --cluster-tag-name ${var.cluster_tag_name} --environment LINODE_TOKEN=${linode_token.bootstrap.token} --environment LINODE_CLI_TOKEN=${linode_token.bootstrap.token}",
+      "/opt/consul/bin/run-consul --${var.role} --cluster-tag-name ${var.cluster_tag_name} --environment LINODE_TOKEN=${linode_token.bootstrap.token} --environment LINODE_CLI_TOKEN=${linode_token.bootstrap.token}",
     ]
   }
 }
