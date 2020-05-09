@@ -523,7 +523,6 @@ function run {
       "$config_dir" \
       "$user" \
       "$cluster_tag_name" \
-      "$cluster_tag_value" \
       "$datacenter" \
       "$enable_gossip_encryption" \
       "$gossip_encryption_key" \
