@@ -355,7 +355,6 @@ function run {
   local user=""
   local cluster_tag_name=""
   local datacenter=""
-  local upgrade_version_tag=""
   local enable_gossip_encryption="false"
   local gossip_encryption_key=""
   local enable_rpc_encryption="false"
