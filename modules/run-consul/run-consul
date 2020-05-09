@@ -180,13 +180,6 @@ function generate_consul_config {
   local -r ca_path="${9}"
   local -r cert_file_path="${10}"
   local -r key_file_path="${11}"
-  local -r cleanup_dead_servers="${12}"
-  local -r last_contact_threshold="${13}"
-  local -r max_trailing_logs="${14}"
-  local -r server_stabilization_time="${15}"
-  local -r redundancy_zone_tag="${16}"
-  local -r disable_upgrade_migration="${17}"
-  local -r upgrade_version_tag=${18}
   local -r config_path="$config_dir/$CONSUL_CONFIG_FILE"
 
   shift 19
@@ -538,13 +531,6 @@ function run {
       "$ca_path" \
       "$cert_file_path" \
       "$key_file_path" \
-      "$cleanup_dead_servers" \
-      "$last_contact_threshold" \
-      "$max_trailing_logs" \
-      "$server_stabilization_time" \
-      "$redundancy_zone_tag" \
-      "$disable_upgrade_migration" \
-      "$upgrade_version_tag" \
       "${recursors[@]}"
   fi
 
