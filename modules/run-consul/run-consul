@@ -529,7 +529,7 @@ function run {
     generate_consul_config "$server" \
       "$config_dir" \
       "$user" \
-      "$cluster_tag_key" \
+      "$cluster_tag_name" \
       "$cluster_tag_value" \
       "$datacenter" \
       "$enable_gossip_encryption" \
