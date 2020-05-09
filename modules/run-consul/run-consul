@@ -102,11 +102,6 @@ function get_instance_json_by_ip {
   linode-cli linodes list --json | jq 'map(select(.ipv4[] | contains ("'"${ip_address}"'")))'
 }
 
-function get_instance_ip_address {
-  log_info 'get_instance_ip_address'
-  curl --silent --location "https://ipv4.icanhazip.com"
-}
-
 function get_instance_json {
   local ip_address=""
   ip_address=$(get_instance_ip_address)
