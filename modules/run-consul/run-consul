@@ -128,8 +128,6 @@ function get_instance_tags {
   local tags=""
   local count_tags=""
 
-
-
   log_info "Looking up tags for Instance $instance_id in $instance_region"
   for (( i=1; i<="$MAX_RETRIES"; i++ )); do
     log_info 'get_instance_tags'
