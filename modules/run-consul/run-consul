@@ -95,13 +95,6 @@ function get_instance_ip_address {
   ip route | grep -E "192.168.[0-9]{1,3}.[0-9]{1,3}" | awk '{print $9}'
 }
 
-function get_instance_json_by_ip {
-  readonly ip_address=$1
-  ip_address=$(get_instance_ip_address)
-  log_info 'get_instance_json_by_ip'
-  linode-cli linodes list --json | jq 'map(select(.ipv4[] | contains ("'"${ip_address}"'")))'
-}
-
 function get_instance_json {
   local ip_address=""
   ip_address=$(get_instance_ip_address)
