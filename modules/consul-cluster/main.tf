@@ -13,6 +13,7 @@ resource "linode_instance" "consul_instance" {
   region = var.region
   type = var.instance_type
   authorized_keys = var.ssh_keys
+  # TODO: clean up role-server magic string
   tags = concat([
     var.cluster_tag_name,
     "${var.cluster_tag_name}-role-${var.role}",
