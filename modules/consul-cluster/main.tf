@@ -13,7 +13,10 @@ resource "linode_instance" "consul_instance" {
   region = var.region
   type = var.instance_type
   authorized_keys = var.ssh_keys
-  tags = concat([var.cluster_tag_name], var.tags)
+  tags = concat([
+    var.cluster_tag_name,
+    "${var.cluster_tag_name}-role-${var.role}",
+  ], var.tags)
   swap_size = 256
   private_ip = true
 

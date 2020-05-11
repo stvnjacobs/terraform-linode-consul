@@ -150,7 +150,8 @@ function get_cluster_size {
   local -r cluster_tag_name="$1"
   local -r instance_region="$2"
 
-  linode-cli linodes list --region "${instance_region}" --tags "${cluster_tag_name}" --json | jq 'length'
+  # TODO: clean up role-server magic string
+  linode-cli linodes list --region "${instance_region}" --tags "${cluster_tag_name}-role-server" --json | jq 'length'
 }
 
 function assert_is_installed {
@@ -219,11 +220,8 @@ EOF
 
   local bootstrap_expect=""
   if [[ "$server" == "true" ]]; then
-    local instance_tags=""
     local cluster_size=""
 
-    instance_tags=$(get_instance_tags "$instance_id" "$instance_region")
-    # TODO: not sure if cluster size is number of servers only
     cluster_size=$(get_cluster_size "$cluster_tag_name" "$instance_region")
 
     bootstrap_expect="\"bootstrap_expect\": $cluster_size,"
