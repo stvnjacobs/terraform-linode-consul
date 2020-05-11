@@ -1,7 +1,7 @@
 variable "cluster_name" {
   description = "The name of the Consul cluster (e.g. consul-stage). This variable is used to namespace all resources created by this module."
   type        = string
-  default     = "tf-linode-consul"
+  default     = "tf-consul"
 }
 
 variable "image_id" {
@@ -42,7 +42,7 @@ variable "num_clients" {
 variable "cluster_tag_name" {
   description = "Add a tag with this name to each instance. This can be used to automatically find other Consul nodes and form a cluster."
   type        = string
-  default     = "consul-servers-auto-join"
+  default     = "tf-consul-autojoin"
 }
 
 variable "tags" {
